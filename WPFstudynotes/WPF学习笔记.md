@@ -103,3 +103,15 @@ Orientation：设置排列方向；水平排列或者垂直排列
 ## Border
 
 > 装饰性控件
+
+##  自定义容器
+
+> 所有容器都继承至Panel; 容器绘制主要重写MeasureCore和ArrangeOverride两个方法
+
+- 重写MeasureCore方法测量子元素所需大小
+
+- 重写ArrangeOverride方法给子元素进行排列
+
+## 资源管理
+
+##  样式管理
