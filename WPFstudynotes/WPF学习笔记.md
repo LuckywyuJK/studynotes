@@ -12,10 +12,10 @@
 
 ###  圆角无边框窗体设置及效果展示
 
-```c#
-//Window属性设置
- WindowStyle="None" AllowsTransparency="True" Background="Transparent">
- //在window里面用Border容器包裹，属性设置如下
+```xaml
+<!--Window属性设置-->
+<Window>WindowStyle="None" AllowsTransparency="True" Background="Transparent"></Window>
+ <!--在window里面用Border容器包裹，属性设置如下-->
     <Border Margin="5" Background="#EEE" CornerRadius="5" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Border.Effect>
             <DropShadowEffect ShadowDepth="0" Color="Gray" Direction="0" Opacity="0.3" BlurRadius="10"/>
@@ -45,7 +45,7 @@
 
 ### 代码及效果展示
 
-```C#
+```xaml
  <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -76,8 +76,8 @@ Orientation：设置排列方向；水平排列或者垂直排列
 
 ### 代码及效果展示
 
-```c#
-//设置成水平列    
+```xaml
+<!--设置成水平列-->    
 <StackPanel Orientation="Horizontal">
         <Button Content="按钮1"/>
         <Button Content="按钮2"/>
@@ -88,8 +88,8 @@ Orientation：设置排列方向；水平排列或者垂直排列
 
 效果展示：![image-20230212204708084](https://cdn.jsdelivr.net/gh/LuckywyuJK/studynotes@master/WPFstudynotes/image-20230212204708084.png)
 
-```c#
-//设置成垂直方向排列    
+```xaml
+<!--设置成垂直方向排列-->    
 <StackPanel Orientation="Vertical" >
         <Button Content="按钮1"/>
         <Button Content="按钮2"/>
@@ -113,5 +113,61 @@ Orientation：设置排列方向；水平排列或者垂直排列
 - 重写ArrangeOverride方法给子元素进行排列
 
 ## 资源管理
+
+- 文件资源
+
+```xaml
+<!--文件资源调用的几种形式-->
+<!--图片资源的调用-->
+<Image Source="pack://application:,,,/WPFCodeText;component/Assets/Docker.png"/>
+<!--字体资源的调用-->
+<TextBlock Text="&#xe60d;" FontFamily="WPFCodeText;component/Assets/#iconfont" FontSize="50" Foreground="OrangeRed"/>
+<TextBlock Text="&#xe60b;" FontFamily="/Assets/#iconfont" FontSize="50" Foreground="Green"/>
+```
+
+- 对象资源
+
+  ```xaml
+  <DockPanel.Resources>
+      <sys:Double x:Key="value">100</sys:Double>
+  </DockPanel.Resources>
+  ```
+
+  - 资源字典的使用
+
+    对多个资源进行封装，方便统一管理
+
+    资源字典的xaml文件属性中生成操作一般是页
+
+    ![image-20230218232627995](https://cdn.jsdelivr.net/gh/LuckywyuJK/studynotes@master/studynotes_pirture/image-20230218232627995.png)
+
+    ```xaml
+    <!--新建一个资源字典文件-->
+    <!--资源字典对象ResourceDictionnary-->
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:sys ="clr-namespace:System;assembly=System.Runtime">
+        <sys:Double x:Key="value">100</sys:Double>
+    </ResourceDictionary>
+    <!--在窗体中调用-->
+    <Window x:Class="WPFCodeText.MainWindow"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:local="clr-namespace:WPFCodeText"
+            mc:Ignorable="d"
+            Title="MainWindow" Height="450" Width="800">
+        <Window.Resources>
+            <!--窗体调用资源字典文件-->
+            <ResourceDictionary Source="/Res.xaml"/>
+        </Window.Resources>
+        <!--此处使用的静态资源使用StaticResource关键字；动态资源使用DynamicResuorce-->
+            <Button Background="Beige" Height="{StaticResource value}"/>
+        </DockPanel>
+    </Window>
+    ```
+
+    
 
 ##  样式管理
